@@ -1,0 +1,23 @@
+﻿@model StoryTime.Data.Models.Story
+@{
+    ViewBag.Title = "Story Details";
+}
+
+<h2>@Model.Title</h2>
+<div class="row jumbotron">
+    @foreach (var sentence in Model.Sentences)
+    {
+        <div class="row">
+            @sentence.Content
+        </div>
+    }
+</div>
+
+@if (this.User.Identity.IsAuthenticated)
+{
+    @Html.Partial("_AddSentencePartial", Model.Id)
+}
+
+
+
+

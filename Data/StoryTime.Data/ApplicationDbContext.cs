@@ -21,6 +21,10 @@
 
         public IDbSet<JokeCategory> JokesCategories { get; set; }
 
+        public IDbSet<Story> Stories { get; set; }
+
+        public IDbSet<StorySentence> StorySentences { get; set; }
+
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();

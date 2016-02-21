@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewBag.Title = "Story home";
+}
+
+<h2>Welcome to the story page</h2>
+
+@if (this.User.Identity.IsAuthenticated)
+{
+    @Html.ActionLink("Create a story", "Create", "Stories", new { area = string.Empty }, new { @class = "btn btn-lg btn-success"})
+}
+
+
+
+
