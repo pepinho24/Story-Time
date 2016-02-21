@@ -7,6 +7,8 @@
     {
         StorySentence AddSentence(int storyId, string content, string author);
 
+        void AddWriter(int storyId, string writer, string author);
+
         Story Create(string title, string creatorName);
 
         Story GetById(int id);

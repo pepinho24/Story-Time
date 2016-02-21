@@ -5,6 +5,16 @@
 
 <h2>@Model.Title</h2>
 <h3>by @(string.Join(", ", Model.Writers.Select(wde=>wde.Name)))</h3>
+@if (this.User.Identity.IsAuthenticated)
+{
+    @Html.ActionLink("Story Settings", "Index", "StorySettings", new { area = string.Empty, id=Model.Id }, new { @class = "btn btn-lg btn-default" })
+}
+else
+{
+    <a href="#" class="btn btn-default">Ask to join</a>
+    /*@Html.ActionLink("Create a story", "Create", "Stories", new { area = string.Empty }, new { @class = "btn btn-lg btn-success" })*/
+}
+
 <div class="row jumbotron">
     @foreach (var sentence in Model.Sentences)
     {

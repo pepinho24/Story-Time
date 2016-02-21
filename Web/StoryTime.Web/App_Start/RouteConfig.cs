@@ -9,6 +9,11 @@
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
             routes.MapRoute(
+              name: "StorySettings",
+              url: "Stories/{id}/Settings",
+              defaults: new { controller = "StorySettings", action = "Index", });
+
+            routes.MapRoute(
                 name: "JokePage",
                 url: "Joke/{id}",
                 defaults: new { controller = "Jokes", action = "ById" });

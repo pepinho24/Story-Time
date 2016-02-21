@@ -206,6 +206,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="App_Start\GlimpseSecurityPolicy.cs" />
     <Compile Include="Controllers\StoriesController.cs" />
+    <Compile Include="Controllers\StorySettingsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -302,6 +303,8 @@
     <Content Include="Views\Stories\Details.cshtml" />
     <Content Include="Views\Shared\_AddSentencePartial.cshtml" />
     <Content Include="Views\Stories\Index.cshtml" />
+    <Content Include="Views\StorySettings\Index.cshtml" />
+    <Content Include="Views\Shared\_AddWriterPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,16 @@
+﻿@model StoryTime.Data.Models.Story
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>@Model.Title - Settings</h2>
+@foreach (var writer in Model.Writers)
+{
+    <div class="row">@writer.Name</div>
+}
+@if (this.User.Identity.Name == Model.Creator)
+{
+    @Html.Partial("_AddWriterPartial", Model.Id)
+}
+
+

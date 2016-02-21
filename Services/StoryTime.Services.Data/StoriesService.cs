@@ -52,5 +52,19 @@
 
             // return this.stories.All().OrderBy(x => Guid.NewGuid()).Take(count);
         }
+
+        public void AddWriter(int storyId, string writer, string author)
+        {
+            // TODO: Validation, does the writer exist
+            var story = this.stories.GetById(storyId);
+            if (story.Creator != author)
+            {
+                return;
+            }
+
+            var writerEntity = new StoryWriter() { Name = writer };
+            story.Writers.Add(writerEntity);
+            this.stories.Save();
+        }
     }
 }
