@@ -1,4 +1,5 @@
-﻿
+﻿@model IEnumerable<StoryTime.Data.Models.Story>
+@using System.Linq
 @{
     ViewBag.Title = "Story home";
 }
@@ -7,9 +8,22 @@
 
 @if (this.User.Identity.IsAuthenticated)
 {
-    @Html.ActionLink("Create a story", "Create", "Stories", new { area = string.Empty }, new { @class = "btn btn-lg btn-success"})
+    @Html.ActionLink("Create a story", "Create", "Stories", new { area = string.Empty }, new { @class = "btn btn-lg btn-success" })
 }
 
+<br />
+
+@foreach (var story in Model)
+{
+    <div class="row well">
+
+        <h3> @Html.ActionLink(story.Title, "Details", "Stories", new { area = string.Empty, id = story.Id }, new { })</h3>
+
+        <blockquote>
+            @(string.Join(". ", story.Sentences.ToList().Select(s => s.Content)))
+        </blockquote>
+    </div>
+}
 
 
 

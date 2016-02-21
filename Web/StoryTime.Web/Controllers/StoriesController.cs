@@ -21,7 +21,8 @@ namespace StoryTime.Web.Controllers
         // GET: Stories
         public ActionResult Index()
         {
-            return this.View();
+            var stories = this.stories.GetLatestStories(10).ToList();
+            return this.View(stories);
         }
 
         // GET: Stories/Details/5
