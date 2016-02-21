@@ -23,9 +23,12 @@
             return story;
         }
 
-        public Story Create(string title)
+        public Story Create(string title, string creatorName)
         {
-            var story = new Story() { Title = title };
+            var creator = new StoryWriter() { Name = creatorName };
+            var story = new Story() { Title = title, Creator = creatorName };
+            story.Writers.Add(creator);
+
             this.stories.Add(story);
             this.stories.Save();
 

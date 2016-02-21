@@ -25,6 +25,8 @@
 
         public IDbSet<StorySentence> StorySentences { get; set; }
 
+        public IDbSet<StoryWriter> StoryWriters { get; set; }
+
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();

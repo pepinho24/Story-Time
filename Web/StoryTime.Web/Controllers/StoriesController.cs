@@ -1,14 +1,14 @@
-﻿using StoryTime.Data.Models;
-using StoryTime.Services.Data;
-using StoryTime.Web.ViewModels.Stories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-
-namespace StoryTime.Web.Controllers
+﻿namespace StoryTime.Web.Controllers
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Web;
+    using System.Web.Mvc;
+    using StoryTime.Data.Models;
+    using StoryTime.Services.Data;
+    using StoryTime.Web.ViewModels.Stories;
+
     public class StoriesController : BaseController
     {
         private readonly IStoriesService stories;
@@ -32,6 +32,7 @@ namespace StoryTime.Web.Controllers
             return this.View(story);
         }
 
+        // TODO: Extract to SentencesController and make it ajax
         // POST: Stories/Details/5
         [HttpPost]
         [Authorize]
@@ -55,31 +56,8 @@ namespace StoryTime.Web.Controllers
         {
             try
             {
-                var storyId = this.stories.Create(model.Title).Id;
+                var storyId = this.stories.Create(model.Title, this.User.Identity.Name).Id;
                 return this.RedirectToAction("Details", new { id = storyId });
-            }
-            catch
-            {
-                return this.View();
-            }
-        }
-
-        // GET: Stories/Edit/5
-        public ActionResult Edit(int id)
-        {
-
-            return this.View();
-        }
-
-        // POST: Stories/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return this.RedirectToAction("Index");
             }
             catch
             {
@@ -100,7 +78,6 @@ namespace StoryTime.Web.Controllers
             try
             {
                 // TODO: Add delete logic here
-
                 return this.RedirectToAction("Index");
             }
             catch

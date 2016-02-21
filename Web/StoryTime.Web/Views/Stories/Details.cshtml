@@ -4,6 +4,7 @@
 }
 
 <h2>@Model.Title</h2>
+<h3>by @(string.Join(", ", Model.Writers.Select(wde=>wde.Name)))</h3>
 <div class="row jumbotron">
     @foreach (var sentence in Model.Sentences)
     {

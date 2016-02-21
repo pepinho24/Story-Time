@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace StoryTime.Web.ViewModels.Stories
+﻿namespace StoryTime.Web.ViewModels.Stories
 {
     public class StoryInputModel
     {

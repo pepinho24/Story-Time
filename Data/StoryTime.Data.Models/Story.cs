@@ -12,9 +12,14 @@
         public Story()
         {
             this.Sentences = new HashSet<StorySentence>();
+            this.Writers = new HashSet<StoryWriter>();
         }
 
         public string Title { get; set; }
+
+        public string Creator { get; set; }
+
+        public virtual ICollection<StoryWriter> Writers { get; set; }
 
         public virtual ICollection<StorySentence> Sentences { get; set; }
     }
