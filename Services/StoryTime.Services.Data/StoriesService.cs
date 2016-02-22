@@ -28,7 +28,13 @@
         public Story Create(string title, string creatorName)
         {
             var creator = new StoryWriter() { Name = creatorName };
-            var story = new Story() { Title = title, Creator = creatorName };
+            var story = new Story()
+            {
+                Title = title,
+                Creator = creatorName,
+                IsStoryFinished = false,
+                WriterInTurn = 0
+            };
             story.Writers.Add(creator);
 
             this.stories.Add(story);
@@ -37,15 +43,22 @@
             return story;
         }
 
-        public StorySentence AddSentence(int storyId, string content, string author)
+        public void AddSentence(int storyId, string content, string author)
         {
-            var sentence = new StorySentence() { Content = content, Author = author };
             var story = this.stories.GetById(storyId);
+            story.WriterInTurn = story.WriterInTurn >= story.Writers.Count ? 0 : story.WriterInTurn;
+            var wrInTurn = story.Writers.ElementAtOrDefault(story.WriterInTurn);
+
+            if (wrInTurn == null || wrInTurn.Name != author)
+            {
+                return;
+            }
+
+            var sentence = new StorySentence() { Content = content, Author = author };
 
             story.Sentences.Add(sentence);
+            story.WriterInTurn++;
             this.stories.Save();
-
-            return story.Sentences.LastOrDefault();
         }
 
         public IQueryable<Story> GetLatestStories(int count)

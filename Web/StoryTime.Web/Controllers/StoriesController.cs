@@ -1,14 +1,12 @@
 ﻿namespace StoryTime.Web.Controllers
 {
-    using System;
-    using System.Collections.Generic;
     using System.Linq;
-    using System.Web;
     using System.Web.Mvc;
-    using StoryTime.Data.Models;
     using StoryTime.Services.Data;
     using StoryTime.Web.ViewModels.Stories;
-
+    using StoryTime.Web.Infrastructure.Mapping;
+    using AutoMapper.QueryableExtensions;
+    using System.Collections.Generic;
     public class StoriesController : BaseController
     {
         private readonly IStoriesService stories;
@@ -21,15 +19,19 @@
         // GET: Stories
         public ActionResult Index()
         {
-            var stories = this.stories.GetLatestStories(10).ToList();
-            return this.View(stories);
+            var stories = this.stories.GetLatestStories(10);
+            var viewModel = this.Mapper.Map<ICollection<StoryViewModel>>(stories);
+                //.To<ICollection<StoryViewModel>>()
+                //.ToList();
+            return this.View(viewModel);
         }
 
         // GET: Stories/Details/5
         public ActionResult Details(int id)
         {
             var story = this.stories.GetById(id);
-            return this.View(story);
+            var viewModel = this.Mapper.Map<StoryViewModel>(story);
+            return this.View(viewModel);
         }
 
         // GET: Stories/Create
@@ -40,12 +42,13 @@
 
         // POST: Stories/Create
         [HttpPost]
+        [Authorize]
         public ActionResult Create(StoryInputModel model)
         {
             try
             {
                 var storyId = this.stories.Create(model.Title, this.User.Identity.Name).Id;
-                return this.RedirectToAction("Details", new { id = storyId });
+                return this.RedirectToAction("Index", "StorySettings", new { id = storyId });
             }
             catch
             {

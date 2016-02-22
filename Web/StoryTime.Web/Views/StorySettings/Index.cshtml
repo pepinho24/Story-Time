@@ -4,6 +4,7 @@
 }
 
 <h2>@Model.Title - Settings</h2>
+@Html.ActionLink("Back to story", "Details", "Stories", new { area = string.Empty, id = Model.Id }, new { @class = "btn btn-lg btn-default" })
 @foreach (var writer in Model.Writers)
 {
     <div class="row well">

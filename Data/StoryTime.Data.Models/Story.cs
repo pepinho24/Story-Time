@@ -22,5 +22,9 @@
         public virtual ICollection<StoryWriter> Writers { get; set; }
 
         public virtual ICollection<StorySentence> Sentences { get; set; }
+
+        public int WriterInTurn { get; set; }
+
+        public bool IsStoryFinished { get; set; }
     }
 }

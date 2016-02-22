@@ -5,7 +5,7 @@
 
     public interface IStoriesService
     {
-        StorySentence AddSentence(int storyId, string content, string author);
+        void AddSentence(int storyId, string content, string author);
 
         void AddWriter(int storyId, string writer, string author);
 

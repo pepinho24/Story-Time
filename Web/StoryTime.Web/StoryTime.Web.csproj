@@ -233,8 +233,11 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\Manage\SetPasswordViewModel.cs" />
     <Compile Include="ViewModels\Manage\VerifyPhoneNumberViewModel.cs" />
+    <Compile Include="ViewModels\Stories\Sentence.cs" />
     <Compile Include="ViewModels\Stories\SentenceInputModel.cs" />
+    <Compile Include="ViewModels\Stories\SentenceViewModel.cs" />
     <Compile Include="ViewModels\Stories\StoryInputModel.cs" />
+    <Compile Include="ViewModels\Stories\StoryViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
