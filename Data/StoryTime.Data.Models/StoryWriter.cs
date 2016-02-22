@@ -1,9 +1,9 @@
 ﻿namespace StoryTime.Data.Models
 {
-    public class StoryWriter
-    {
-        public int Id { get; set; }
+    using StoryTime.Data.Common.Models;
 
+    public class StoryWriter : BaseModel<int>
+    {
         public string Name { get; set; }
 
         public int StoryId { get; set; }

@@ -9,6 +9,8 @@
 
         void AddWriter(int storyId, string writer, string author);
 
+        void RemoveWriter(int storyId, string writer, string author);
+
         Story Create(string title, string creatorName);
 
         Story GetById(int id);

@@ -32,18 +32,6 @@
             return this.View(story);
         }
 
-        // TODO: Extract to SentencesController and make it ajax
-        // POST: Stories/Details/5
-        [HttpPost]
-        [Authorize]
-        public ActionResult AddSentence(string id, string model)
-        {
-            var intId = int.Parse(id);
-            this.stories.AddSentence(intId, model, this.User.Identity.Name);
-
-            return this.RedirectToAction("Details", new { id = id });
-        }
-
         // GET: Stories/Create
         public ActionResult Create()
         {

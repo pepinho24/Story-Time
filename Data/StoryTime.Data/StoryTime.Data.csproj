@@ -76,6 +76,10 @@
     <Compile Include="Migrations\201602212210424_AddedCreatorAndWritersPropertiesToStoryModel.Designer.cs">
       <DependentUpon>201602212210424_AddedCreatorAndWritersPropertiesToStoryModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201602220057499_UpdateStoryWriterModel.cs" />
+    <Compile Include="Migrations\201602220057499_UpdateStoryWriterModel.Designer.cs">
+      <DependentUpon>201602220057499_UpdateStoryWriterModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -109,6 +113,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201602212210424_AddedCreatorAndWritersPropertiesToStoryModel.resx">
       <DependentUpon>201602212210424_AddedCreatorAndWritersPropertiesToStoryModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602220057499_UpdateStoryWriterModel.resx">
+      <DependentUpon>201602220057499_UpdateStoryWriterModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

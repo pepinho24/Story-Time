@@ -11,10 +11,12 @@
     public class StoriesService : IStoriesService
     {
         private readonly IDbRepository<Story> stories;
+        private readonly IDbRepository<StoryWriter> writers;
 
-        public StoriesService(IDbRepository<Story> stories)
+        public StoriesService(IDbRepository<Story> stories, IDbRepository<StoryWriter> writers)
         {
             this.stories = stories;
+            this.writers = writers;
         }
 
         public Story GetById(int id)
@@ -65,6 +67,23 @@
             var writerEntity = new StoryWriter() { Name = writer };
             story.Writers.Add(writerEntity);
             this.stories.Save();
+        }
+
+        public void RemoveWriter(int storyId, string writer, string author)
+        {
+            // TODO: Validation, does the writer exist
+            var story = this.stories.GetById(storyId);
+            if (story.Creator != author)
+            {
+                return;
+            }
+
+            var wr = this.writers.All().Where(w => w.Name == writer && w.StoryId == storyId).FirstOrDefault();
+            if (wr != null)
+            {
+                this.writers.HardDelete(wr);
+                this.writers.Save();
+            }
         }
     }
 }

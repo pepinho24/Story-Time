@@ -205,6 +205,7 @@
     <Compile Include="Controllers\JokesController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="App_Start\GlimpseSecurityPolicy.cs" />
+    <Compile Include="Controllers\SentencesController.cs" />
     <Compile Include="Controllers\StoriesController.cs" />
     <Compile Include="Controllers\StorySettingsController.cs" />
     <Compile Include="Global.asax.cs">
@@ -311,6 +312,7 @@
     <Folder Include="Areas\Administration\Models\" />
     <Folder Include="Areas\Administration\Views\Shared\" />
     <Folder Include="Views\Base\" />
+    <Folder Include="Views\Sentences\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

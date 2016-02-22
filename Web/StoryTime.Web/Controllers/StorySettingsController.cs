@@ -32,5 +32,15 @@
 
             return this.RedirectToAction("Index", "StorySettings", new { id = id });
         }
+
+        [HttpPost]
+        [Authorize]
+        public ActionResult RemoveWriter(string id, string writer)
+        {
+            var intId = int.Parse(id);
+            this.stories.RemoveWriter(intId, writer, this.User.Identity.Name);
+
+            return this.RedirectToAction("Index", "StorySettings", new { id = id });
+        }
     }
 }

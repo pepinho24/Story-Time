@@ -6,7 +6,18 @@
 <h2>@Model.Title - Settings</h2>
 @foreach (var writer in Model.Writers)
 {
-    <div class="row">@writer.Name</div>
+    <div class="row well">
+        <div class="col-md-10">@writer.Name</div>
+        @if (this.User.Identity.Name == Model.Creator)
+        {
+            using (Html.BeginForm("RemoveWriter", "StorySettings", new { area = string.Empty, id = Model.Id }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.Hidden("writer", writer.Name)
+                <input type="submit" value="Remove" class="btn btn-danger" />
+            }
+        }
+    </div>
 }
 @if (this.User.Identity.Name == Model.Creator)
 {
