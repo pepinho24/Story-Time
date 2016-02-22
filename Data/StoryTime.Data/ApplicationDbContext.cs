@@ -27,6 +27,10 @@
 
         public IDbSet<StoryWriter> StoryWriters { get; set; }
 
+        public IDbSet<TemplateStory> TemplateStories { get; set; }
+
+        public IDbSet<StoryCharacter> StoryCharacters { get; set; }
+
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
