@@ -98,5 +98,17 @@
                 this.writers.Save();
             }
         }
+
+        public void Finish(int storyId, string creator)
+        {
+            var story = this.stories.GetById(storyId);
+            if (story.Creator != creator)
+            {
+                return;
+            }
+
+            story.IsStoryFinished = true;
+            this.stories.Save();
+        }
     }
 }

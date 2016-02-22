@@ -5,9 +5,9 @@
 
 <h2>@Model.Title</h2>
 <h3>by @(string.Join(", ", Model.Writers))</h3>
-@if (this.User.Identity.IsAuthenticated && this.User.Identity.Name == Model.Creator )
+@if (this.User.Identity.IsAuthenticated && this.User.Identity.Name == Model.Creator)
 {
-    @Html.ActionLink("Story Settings", "Index", "StorySettings", new { area = string.Empty, id=Model.Id }, new { @class = "btn btn-lg btn-default" })
+    @Html.ActionLink("Story Settings", "Index", "StorySettings", new { area = string.Empty, id = Model.Id }, new { @class = "btn btn-lg btn-default" })
 }
 else
 {
@@ -15,18 +15,38 @@ else
     /*@Html.ActionLink("Create a story", "Create", "Stories", new { area = string.Empty }, new { @class = "btn btn-lg btn-success" })*/
 }
 
+@if (this.User.Identity.Name == Model.Creator && !Model.IsStoryFinished)
+{
+    using (Html.BeginForm("FinishStory", "Stories", new { area = string.Empty, id = Model.Id }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        <input type="submit" value="Finish Story" class="btn btn-info" />
+    }
+}
+
+
 <div class="row jumbotron">
     @foreach (var sentence in Model.Sentences)
     {
-        <div class="row">
-            @sentence.Content
-        </div>
+        <span>
+            @sentence.Content.&nbsp;
+        </span>
     }
 </div>
-<div class="row">@Model.WriterInTurn</div>
-@if (this.User.Identity.IsAuthenticated)
+
+@if (this.User.Identity.IsAuthenticated && !Model.IsStoryFinished)
 {
+    <div class="row">It is @(Model.WriterInTurn)'s turn</div>
     @Html.Partial("_AddSentencePartial", Model.Id)
+}
+else if(Model.IsStoryFinished)
+{
+   <div class="well"><strong>This is a finished story!</strong></div>
+}
+else
+{
+    <div class="row">It is @(Model.WriterInTurn)'s turn</div>
+    <div class="well"><strong>This story is in progress!</strong></div>
 }
 
 

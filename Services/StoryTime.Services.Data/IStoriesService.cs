@@ -16,5 +16,7 @@
         Story GetById(int id);
 
         IQueryable<Story> GetLatestStories(int count);
+
+        void Finish(int storyId, string creator);
     }
 }

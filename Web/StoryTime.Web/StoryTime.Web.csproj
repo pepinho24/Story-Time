@@ -208,6 +208,7 @@
     <Compile Include="Controllers\SentencesController.cs" />
     <Compile Include="Controllers\StoriesController.cs" />
     <Compile Include="Controllers\StorySettingsController.cs" />
+    <Compile Include="Controllers\TemplateStoryController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -309,6 +310,7 @@
     <Content Include="Views\Stories\Index.cshtml" />
     <Content Include="Views\StorySettings\Index.cshtml" />
     <Content Include="Views\Shared\_AddWriterPartial.cshtml" />
+    <Content Include="Views\TemplateStory\Configure.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

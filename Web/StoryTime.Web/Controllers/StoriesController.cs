@@ -56,6 +56,21 @@
             }
         }
 
+        [HttpPost]
+        [Authorize]
+        public ActionResult FinishStory(int id)
+        {
+            try
+            {
+              this.stories.Finish(id, this.User.Identity.Name);
+                return this.RedirectToAction("Details", "Stories", new { id = id });
+            }
+            catch
+            {
+                return this.View();
+            }
+        }
+
         // GET: Stories/Delete/5
         public ActionResult Delete(int id)
         {
