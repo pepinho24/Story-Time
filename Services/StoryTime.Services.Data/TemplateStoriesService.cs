@@ -22,7 +22,7 @@
         public void AddSentence(int storyId, string content, string author)
         {
             var story = this.templateStories.GetById(storyId);
-            if (story.CharacterInTurn.Name != author)
+            if (story.CharacterInTurn != author)
             {
                 return;
             }
@@ -30,7 +30,7 @@
             var sentence = new StorySentence() { Content = content, Author = author };
 
             story.Sentences.Add(sentence);
-            story.CharacterInTurn = story.Characters.FirstOrDefault(c => c.Name == "Narrator");
+            story.CharacterInTurn = "Narrator";
             this.templateStories.Save();
         }
 
@@ -85,13 +85,12 @@
                 narrator = story.Characters.FirstOrDefault(c => c.Name == "Narrator");
             }
 
-            story.CharacterInTurn = narrator;
+            story.CharacterInTurn = narrator.Name;
             this.templateStories.Save();
         }
 
         public TemplateStory Create(string title, string creatorName)
         {
-            var creator = new StoryCharacter() { Name = "Narrator", RepresentedBy = creatorName };
             var story = new TemplateStory()
             {
                 Title = title,
@@ -99,11 +98,11 @@
                 IsStoryFinished = false
             };
 
-            story.Characters.Add(creator);
-            story.CharacterInTurn = creator;
-
             this.templateStories.Add(story);
             this.templateStories.Save();
+            this.AddCharacter(story.Id, "Narrator", creatorName);
+            this.AddWriterToCharacter(story.Id, "Narrator", creatorName, creatorName);
+            this.ChangeTurnToCharacter(story.Id, "Narrator", creatorName);
 
             return story;
         }

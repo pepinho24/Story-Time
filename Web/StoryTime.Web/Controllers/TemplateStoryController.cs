@@ -9,9 +9,9 @@
 
     public class TemplateStoryController : BaseController
     {
-        private readonly IStoriesService stories;
+        private readonly ITemplateStoriesService stories;
 
-        public TemplateStoryController(IStoriesService stories)
+        public TemplateStoryController(ITemplateStoriesService stories)
         {
             this.stories = stories;
         }
@@ -19,7 +19,8 @@
         // GET: TemplateStory
         public ActionResult Configure(int id)
         {
-            return View();
+            var story = this.stories.GetById(id);
+            return this.View(story);
         }
     }
 }

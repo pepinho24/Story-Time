@@ -19,7 +19,7 @@
 
         public string Narrator { get; set; }
 
-        public StoryCharacter CharacterInTurn { get; set; }
+        public string CharacterInTurn { get; set; }
 
         public virtual ICollection<StoryCharacter> Characters { get; set; }
 

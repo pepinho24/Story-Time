@@ -24,11 +24,13 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Type, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <label for="Normal" class="control-label col-md-5">Normal</label>
-                @Html.RadioButtonFor(model => model.Type, "Normal", htmlAttributes: new { @class = "control-label col-md-5", id = "Normal" })
-
-                <label for="Templated" class="control-label col-md-5">Templated</label>
-                @Html.RadioButtonFor(model => model.Type, "Templated", htmlAttributes: new { @class = "control-label col-md-5", id = "Templated" })
+                <div class="row">
+                    <label for="Normal" class="control-label col-md-2">Normal</label>
+                    @Html.RadioButtonFor(model => model.Type, "Normal", htmlAttributes: new { @class = "control-label col-md-1 pull-left", id = "Normal" })
+               
+                    <label for="Templated" class="control-label col-md-2">Templated</label>
+                    @Html.RadioButtonFor(model => model.Type, "Templated", htmlAttributes: new { @class = "control-label col-md-1 pull-left", id = "Templated" })
+                </div>
             </div>
         </div>
 

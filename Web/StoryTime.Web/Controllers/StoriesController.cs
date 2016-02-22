@@ -7,13 +7,16 @@
     using StoryTime.Web.Infrastructure.Mapping;
     using AutoMapper.QueryableExtensions;
     using System.Collections.Generic;
+
     public class StoriesController : BaseController
     {
         private readonly IStoriesService stories;
+        private readonly ITemplateStoriesService templateStories;
 
-        public StoriesController(IStoriesService stories)
+        public StoriesController(IStoriesService stories, ITemplateStoriesService templateStories)
         {
             this.stories = stories;
+            this.templateStories = templateStories;
         }
 
         // GET: Stories
@@ -21,8 +24,8 @@
         {
             var stories = this.stories.GetLatestStories(10);
             var viewModel = this.Mapper.Map<ICollection<StoryViewModel>>(stories);
-                //.To<ICollection<StoryViewModel>>()
-                //.ToList();
+            //.To<ICollection<StoryViewModel>>()
+            //.ToList();
             return this.View(viewModel);
         }
 
@@ -45,14 +48,29 @@
         [Authorize]
         public ActionResult Create(StoryInputModel model)
         {
-            try
+            if (model.Type == "Normal")
             {
-                var storyId = this.stories.Create(model.Title, this.User.Identity.Name).Id;
-                return this.RedirectToAction("Index", "StorySettings", new { id = storyId });
+                try
+                {
+                    var storyId = this.stories.Create(model.Title, this.User.Identity.Name).Id;
+                    return this.RedirectToAction("Index", "StorySettings", new { id = storyId });
+                }
+                catch
+                {
+                    return this.View();
+                }
             }
-            catch
+            else
             {
-                return this.View();
+                try
+                {
+                    var storyId = this.templateStories.Create(model.Title, this.User.Identity.Name).Id;
+                    return this.RedirectToAction("Configure", "TemplateStory", new { id = storyId });
+                }
+                catch (System.Exception ex)
+                {
+                    return this.View();
+                }
             }
         }
 
@@ -62,7 +80,7 @@
         {
             try
             {
-              this.stories.Finish(id, this.User.Identity.Name);
+                this.stories.Finish(id, this.User.Identity.Name);
                 return this.RedirectToAction("Details", "Stories", new { id = id });
             }
             catch
