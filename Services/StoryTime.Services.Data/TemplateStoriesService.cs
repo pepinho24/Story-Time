@@ -54,8 +54,8 @@
                 return;
             }
 
-            story.Characters.Remove(story.Characters.FirstOrDefault(c => c.Name == character));
-            this.templateStories.Save();
+            this.characters.HardDelete(story.Characters.FirstOrDefault(c => c.Name == character));
+            this.characters.Save();
         }
 
         public void AddWriterToCharacter(int storyId, string character, string writer, string author)

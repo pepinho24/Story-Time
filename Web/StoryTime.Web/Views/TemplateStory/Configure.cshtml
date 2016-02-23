@@ -3,5 +3,59 @@
     ViewBag.Title = "Configure";
 }
 
-<h2>Configure "@(Model.Title)"</h2>
+<h2>Configure <strong>"@(Model.Title)"</strong></h2>
+<br />
+<hr />
 
+@foreach (var character in Model.Characters)
+{
+    <div class="row">
+        <div class="col-md-10">
+            <div class="col-md-2">
+                <strong>@character.Name</strong>
+            </div>
+            @if (string.IsNullOrEmpty(@character.RepresentedBy))
+                {
+                    using (Html.BeginForm("AddWriterToCharacter", "TemplateStory", new { area = string.Empty, id = Model.Id }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {
+                    @Html.AntiForgeryToken()
+                    <div class="form-group col-md-8">
+                        @*@Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })*@
+                        <div class="col-md-10">
+                            @Html.TextBox("writer", String.Empty, new { @class = "form-control", placeholder = "Enter Writer Username Here" })
+                        </div>
+                    </div>
+                        @Html.Hidden("character", character.Name)
+                        <input type="submit" value="Add Writer" class="btn btn-success col-md-2" />
+                }
+            }
+            else
+            {
+                @: represented by @character.RepresentedBy
+            }
+        </div>
+        <div class="col-md-2">
+            @using (Html.BeginForm("RemoveCharacter", "TemplateStory", new { area = string.Empty, id = Model.Id }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.Hidden("character", character.Name)
+                <input type="submit" value="Remove Character" class="btn btn-danger" />
+            }
+
+        </div>
+    </div>
+}
+
+<br />
+<hr />
+@using (Html.BeginForm("AddCharacter", "TemplateStory", new { area = string.Empty, id = Model.Id }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        <label class="col-md-2 control-label">Enter character: </label>
+        <div class="col-md-8">
+            @Html.TextBox("character", String.Empty, new { @class = "form-control", placeholder = "Enter Character Here" })
+        </div>
+    </div>
+    <input type="submit" value="Add" class="btn btn-success col-md-2" />
+}
