@@ -9,37 +9,13 @@
 
 @if (this.User.Identity.Name == Model.Narrator && !Model.IsStoryFinished)
 {
-    using (Html.BeginForm("FinishStory", "TemplateStory", new { area = string.Empty, id = Model.Id }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-    {
-        @Html.AntiForgeryToken()
-        <input type="submit" value="Finish Story" class="btn btn-info" />
-    }
+    @Html.Partial("_FinishStoryButtonPartial", new InputSettings() { Action = "FinishStory", Controller = "TemplateStory", Id = Model.Id })
 }
-
-@Html.DisplayFor(m => m.Sentences)
-@*<div class="row jumbotron">
-        @foreach (var sentence in Model.Sentences)
-        {
-            <span>
-               @Html.Raw(@sentence.Content.Replace("\n","<br />"))&nbsp;
-            </span>
-        }
-    </div>*@
-
-@if (this.User.Identity.IsAuthenticated && !Model.IsStoryFinished)
-{
-    <div class="row"><h3>It is <strong>@(Model.CharacterInTurn)</strong>'s turn</h3></div>
-    @Html.Partial("_AddSentencePartial", new InputSettings() { Id = Model.Id, Action = "AddSentence", Controller = "TemplateStory" })
-}
-else if (Model.IsStoryFinished)
-{
-    <div class="well"><strong>This is a finished story!</strong></div>
-}
-else
-{
-    <div class="row">It is @(Model.CharacterInTurn)'s turn</div>
-    <div class="well"><strong>This story is in progress!</strong></div>
-}
+<br />
+<div class="well well-lg">
+    @Html.DisplayFor(m => m.Sentences)
+</div>
+@Html.Partial("_TemplateStoryStatusPartial",Model)
 
 @if (this.User.Identity.Name == Model.Narrator && !Model.IsStoryFinished)
 {

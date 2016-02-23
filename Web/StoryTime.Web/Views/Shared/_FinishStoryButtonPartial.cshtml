@@ -1,0 +1,7 @@
+﻿@model StoryTime.Web.ViewModels.Shared.InputSettings
+
+@using (Html.BeginForm(Model.Action, Model.Controller, new { area = string.Empty, id = Model.Id }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <input type="submit" value="Finish Story" class="btn btn-info" />
+}

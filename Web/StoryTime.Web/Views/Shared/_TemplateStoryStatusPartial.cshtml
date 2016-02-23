@@ -1,0 +1,17 @@
+﻿@using StoryTime.Web.ViewModels.Shared
+@model StoryTime.Web.ViewModels.TemplateStories.TemplateStoryViewModel
+
+@if (this.User.Identity.IsAuthenticated && !Model.IsStoryFinished)
+{
+    <div class="row"><h3>It is <strong>@(Model.CharacterInTurn)</strong>'s turn</h3></div>
+    @Html.Partial("_AddSentencePartial", new InputSettings() { Id = Model.Id, Action = "AddSentence", Controller = "TemplateStory" })
+}
+else if (Model.IsStoryFinished)
+{
+    <div class="well"><strong>This is a finished story!</strong></div>
+}
+else
+{
+    <div class="row">It is @(Model.CharacterInTurn)'s turn</div>
+    <div class="well"><strong>This story is in progress!</strong></div>
+}

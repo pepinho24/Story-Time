@@ -319,6 +319,9 @@
     <Content Include="Views\TemplateStory\Index.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\TemplateSentences.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\TemplateStoryViewModel.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\StoryViewModel.cshtml" />
+    <Content Include="Views\Shared\_TemplateStoryStatusPartial.cshtml" />
+    <Content Include="Views\Shared\_FinishStoryButtonPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
