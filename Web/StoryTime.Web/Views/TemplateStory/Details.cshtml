@@ -12,26 +12,36 @@
     @Html.Partial("_FinishStoryButtonPartial", new InputSettings() { Action = "FinishStory", Controller = "TemplateStory", Id = Model.Id })
 }
 <br />
-<div class="well well-lg">
-    @Html.DisplayFor(m => m.Sentences)
+<div class="row">
+    <h4>Characters:</h4>
+        @Html.DisplayFor(m => m.Characters)
 </div>
-@Html.Partial("_TemplateStoryStatusPartial",Model)
+<br />
+<div class="row">
+    <h4>Story:</h4>
+    <div class="well well-lg">
+        @Html.DisplayFor(m => m.Sentences)
+    </div>
+    @Html.Partial("_TemplateStoryStatusPartial", Model)
+</div>
 
-@if (this.User.Identity.Name == Model.Narrator && !Model.IsStoryFinished)
-{
-    <div class="row">
-        <div class="col-md-2 pull-left"><strong>Set turn to: </strong></div>
-        @using (Html.BeginForm("ChangeTurn", "TemplateStory", new { area = string.Empty, id = Model.Id }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-        {
-            var listItems = new List<SelectListItem>();
-            foreach (var character in Model.Characters)
+
+    @if (this.User.Identity.Name == Model.Narrator && !Model.IsStoryFinished)
+    {
+        <div class="row">
+            <div class="col-md-2 pull-left"><strong>Set turn to: </strong></div>
+            @using (Html.BeginForm("ChangeTurn", "TemplateStory", new { area = string.Empty, id = Model.Id }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
             {
-                listItems.Add(new SelectListItem() { Text = character.Name, Value = character.Name });
+                var listItems = new List<SelectListItem>();
+                foreach (var character in Model.Characters)
+                {
+                    listItems.Add(new SelectListItem() { Text = character.Name, Value = character.Name });
+                }
+
+                @Html.AntiForgeryToken()
+                @Html.DropDownList("character", listItems, new { @class = "form-control col-md-8 pull-left" })
+                <input type="submit" value="Change turn" class="btn btn-info col-md-2 pull-left" />
             }
 
-            @Html.AntiForgeryToken()
-            @Html.DropDownList("character", listItems, new { @class = "form-control col-md-8 pull-left" })
-            <input type="submit" value="Change turn" class="btn btn-info col-md-2 pull-left" />
-        }
-
-    </div>}
+        </div>
+    }

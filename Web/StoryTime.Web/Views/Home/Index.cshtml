@@ -2,50 +2,13 @@
 @{
     ViewBag.Title = "Home Page";
 }
-
-<h1>Stories</h1>
 <div class="row">
-    @foreach (var story in Model.Stories)
-    {
-        <div class="col-md-4">
-           <a href="/Stories/Details/@story.Id">
-               <h2><strong>@story.Title</strong></h2>
-        </a>
-        <div>@(string.Join(" ", story.Sentences.Select(s => s.Content)))</div>
+    <div class="col-md-6">
+        <h1>Stories</h1>
+        @Html.DisplayFor(m => m.Stories)
     </div>
-    }
+    <div class="col-md-6">
+        <h1>Template Stories</h1>
+        @Html.DisplayFor(m => m.TemplateStories)
+    </div>
 </div>
-
-<h1>Template Stories</h1>
-<div class="row">
-    @foreach (var story in Model.TemplateStories)
-    {
-        <div class="col-md-4">
-            <a href="/TemplateStory/@story.Id/Details">
-                <h2><strong>@story.Title</strong></h2>
-            </a>
-            <div>@(string.Join(" ", story.Sentences.Select(s => s.Content)))</div>
-        </div>
-    }
-</div>
-@*<h1>Вицове</h1>
-<div class="row">
-    @foreach (var joke in Model.Jokes)
-    {
-        <div class="col-md-4">
-            <a href="@joke.Url">
-                @Html.Raw(joke.Content.Replace("\n", "<br />"))
-            </a>
-            <div>@joke.Category</div>
-        </div>
-    }
-</div>
-<h1>Категории</h1>
-    <div class="row">
-    @foreach (var category in Model.Categories)
-    {
-        <div class="col-md-2">
-            @category.Name
-        </div>
-    }
-</div>*@
