@@ -25,6 +25,8 @@
 
         public IDbSet<StorySentence> StorySentences { get; set; }
 
+        public IDbSet<TemplateStorySentence> TemplateStorySentences { get; set; }
+
         public IDbSet<StoryWriter> StoryWriters { get; set; }
 
         public IDbSet<TemplateStory> TemplateStories { get; set; }

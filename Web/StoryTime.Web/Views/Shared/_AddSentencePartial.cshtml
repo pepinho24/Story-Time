@@ -1,5 +1,5 @@
-﻿
-@using (Html.BeginForm("Add", "Sentences", new { id = Model }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+﻿@model StoryTime.Web.ViewModels.Shared.InputSettings
+@using (Html.BeginForm(Model.Action, Model.Controller, new { id = Model.Id.ToString() }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
     
@@ -10,20 +10,16 @@
         <div class="form-group">
             @Html.LabelFor(model => model, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextBox("model", "", htmlAttributes: new { @class = "form-control", required="required", placeholder = "Enter Sentence Here"})
+                @Html.TextArea("model", "", htmlAttributes: new { @class = "form-control", required="required", placeholder = "Enter Sentence Here", rows = 5, style = "min-width: 100%"})
                 @*@Html.TextBox(model => model, new { htmlAttributes = new { @class = "form-control" } })*@
                 @*@Html.ValidationMessageFor(model => model, "", new { @class = "text-danger" })*@
             </div>
         </div>
 
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
+            <div class="col-md-2">
                 <input type="submit" value="Add sentence" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>

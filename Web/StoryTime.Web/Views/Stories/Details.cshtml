@@ -1,4 +1,5 @@
-﻿@model StoryTime.Web.ViewModels.Stories.StoryViewModel
+﻿@using StoryTime.Web.ViewModels.Shared
+@model StoryTime.Web.ViewModels.Stories.StoryViewModel
 @{
     ViewBag.Title = "Story Details";
 }
@@ -36,8 +37,10 @@ else
 
 @if (this.User.Identity.IsAuthenticated && !Model.IsStoryFinished)
 {
-    <div class="row">It is @(Model.WriterInTurn)'s turn</div>
-    @Html.Partial("_AddSentencePartial", Model.Id)
+    var wrInTurn = Model.WriterInTurn >= Model.Writers.Count ? 0 : Model.WriterInTurn;
+
+    <div class="row">It is <strong>@(Model.Writers.ElementAt(wrInTurn))</strong>'s turn</div>
+    @Html.Partial("_AddSentencePartial", new InputSettings() { Id = Model.Id , Action = "Add", Controller = "Sentences"})
 }
 else if(Model.IsStoryFinished)
 {

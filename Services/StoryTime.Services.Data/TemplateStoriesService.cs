@@ -22,14 +22,15 @@
         public void AddSentence(int storyId, string content, string author)
         {
             var story = this.templateStories.GetById(storyId);
-            if (story.CharacterInTurn != author)
+            var characterInTurn = story.Characters.FirstOrDefault(c => c.Name == story.CharacterInTurn);
+            if (characterInTurn.RepresentedBy != author)
             {
                 return;
             }
 
-            var sentence = new StorySentence() { Content = content, Author = author };
+            var sentence = new TemplateStorySentence() { Content = content, Author = author };
 
-            story.Sentences.Add(sentence);
+            story.TemplateSentences.Add(sentence);
             story.CharacterInTurn = "Narrator";
             this.templateStories.Save();
         }
@@ -126,6 +127,7 @@
             }
 
             story.IsStoryFinished = true;
+            this.templateStories.Save();
         }
     }
 }

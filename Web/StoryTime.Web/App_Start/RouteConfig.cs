@@ -8,6 +8,12 @@
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+
+            routes.MapRoute(
+                name: "TemplateStoryIndex",
+                url: "TemplateStory/Index",
+                defaults: new { controller = "TemplateStory", action = "Index" });
+
             routes.MapRoute(
              name: "TemplateStory",
              url: "TemplateStory/{id}/{action}",
@@ -29,6 +35,11 @@
                 defaults: new { controller = "Jokes", action = "ById" });
             routes.MapRoute(
                 name: "Default",
+                url: "{controller}/{action}/{id}",
+                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional });
+
+            routes.MapRoute(
+                name: "Controller",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional });
         }

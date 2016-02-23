@@ -1,0 +1,10 @@
+﻿@model ICollection<StoryTime.Web.ViewModels.TemplateStories.TemplateSentenceViewModel>
+
+<div class="row">
+    @foreach (var sentence in Model)
+    {
+        <span>
+            @Html.Raw(@sentence.Content.Replace("\n", "<br />"))&nbsp;
+        </span>
+    }
+</div>

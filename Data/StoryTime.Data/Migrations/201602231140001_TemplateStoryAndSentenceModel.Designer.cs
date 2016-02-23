@@ -7,13 +7,13 @@ namespace StoryTime.Data.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class TemplateStoryModelAndStoryCharacter : IMigrationMetadata
+    public sealed partial class TemplateStoryAndSentenceModel : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(TemplateStoryModelAndStoryCharacter));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(TemplateStoryAndSentenceModel));
         
         string IMigrationMetadata.Id
         {
-            get { return "201602222229323_TemplateStoryModelAndStoryCharacter"; }
+            get { return "201602231140001_TemplateStoryAndSentenceModel"; }
         }
         
         string IMigrationMetadata.Source

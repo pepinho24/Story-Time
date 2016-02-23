@@ -1,0 +1,61 @@
+﻿@using StoryTime.Web.ViewModels.Shared
+@model StoryTime.Web.ViewModels.TemplateStories.TemplateStoryViewModel
+@{
+    ViewBag.Title = "Template Story Details";
+}
+
+<h2>@Model.Title</h2>
+<h3>Narrated by @Model.Narrator</h3>
+
+@if (this.User.Identity.Name == Model.Narrator && !Model.IsStoryFinished)
+{
+    using (Html.BeginForm("FinishStory", "TemplateStory", new { area = string.Empty, id = Model.Id }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        <input type="submit" value="Finish Story" class="btn btn-info" />
+    }
+}
+
+@Html.DisplayFor(m => m.Sentences)
+@*<div class="row jumbotron">
+        @foreach (var sentence in Model.Sentences)
+        {
+            <span>
+               @Html.Raw(@sentence.Content.Replace("\n","<br />"))&nbsp;
+            </span>
+        }
+    </div>*@
+
+@if (this.User.Identity.IsAuthenticated && !Model.IsStoryFinished)
+{
+    <div class="row"><h3>It is <strong>@(Model.CharacterInTurn)</strong>'s turn</h3></div>
+    @Html.Partial("_AddSentencePartial", new InputSettings() { Id = Model.Id, Action = "AddSentence", Controller = "TemplateStory" })
+}
+else if (Model.IsStoryFinished)
+{
+    <div class="well"><strong>This is a finished story!</strong></div>
+}
+else
+{
+    <div class="row">It is @(Model.CharacterInTurn)'s turn</div>
+    <div class="well"><strong>This story is in progress!</strong></div>
+}
+
+@if (this.User.Identity.Name == Model.Narrator && !Model.IsStoryFinished)
+{
+    <div class="row">
+        <div class="col-md-2 pull-left"><strong>Set turn to: </strong></div>
+        @using (Html.BeginForm("ChangeTurn", "TemplateStory", new { area = string.Empty, id = Model.Id }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        {
+            var listItems = new List<SelectListItem>();
+            foreach (var character in Model.Characters)
+            {
+                listItems.Add(new SelectListItem() { Text = character.Name, Value = character.Name });
+            }
+
+            @Html.AntiForgeryToken()
+            @Html.DropDownList("character", listItems, new { @class = "form-control col-md-8 pull-left" })
+            <input type="submit" value="Change turn" class="btn btn-info col-md-2 pull-left" />
+        }
+
+    </div>}

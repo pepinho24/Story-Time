@@ -25,8 +25,8 @@
                             @Html.TextBox("writer", String.Empty, new { @class = "form-control", placeholder = "Enter Writer Username Here" })
                         </div>
                     </div>
-                        @Html.Hidden("character", character.Name)
-                        <input type="submit" value="Add Writer" class="btn btn-success col-md-2" />
+                    @Html.Hidden("character", character.Name)
+                    <input type="submit" value="Add Writer" class="btn btn-success col-md-2" />
                 }
             }
             else
@@ -48,14 +48,19 @@
 
 <br />
 <hr />
-@using (Html.BeginForm("AddCharacter", "TemplateStory", new { area = string.Empty, id = Model.Id }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-{
-    @Html.AntiForgeryToken()
-    <div class="form-group">
-        <label class="col-md-2 control-label">Enter character: </label>
-        <div class="col-md-8">
-            @Html.TextBox("character", String.Empty, new { @class = "form-control", placeholder = "Enter Character Here" })
+<div class="row">
+    @using (Html.BeginForm("AddCharacter", "TemplateStory", new { area = string.Empty, id = Model.Id }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-group col-md-10">
+            <label class="col-md-2 control-label">Enter character: </label>
+            <div class="col-md-8">
+                @Html.TextBox("character", String.Empty, new { @class = "form-control", placeholder = "Enter Character Here" })
+            </div>
         </div>
-    </div>
-    <input type="submit" value="Add" class="btn btn-success col-md-2" />
-}
+        <input type="submit" value="Add" class="btn btn-success col-md-2" />
+    }
+</div>
+<hr />
+<br />
+@Html.ActionLink("Start the story", "Details", "TemplateStory", new { area = string.Empty, id = Model.Id }, new { @class = "btn btn-lg btn-success" })

@@ -12,7 +12,7 @@
     {
         public int Id { get; set; }
 
-        public string WriterInTurn { get; set; }
+        public int WriterInTurn { get; set; }
 
         public string Title { get; set; }
 
@@ -27,11 +27,7 @@
         public void CreateMappings(IMapperConfiguration configuration)
         {
             configuration.CreateMap<Story, StoryViewModel>()
-                .ForMember(x => x.WriterInTurn, opt => opt.MapFrom(
-                    x => x.Writers.ElementAtOrDefault(x.WriterInTurn) == null ?
-                    x.Writers.FirstOrDefault().Name : x.Writers.ElementAtOrDefault(x.WriterInTurn).Name))
                 .ForMember(x => x.Writers, opt => opt.MapFrom(x => x.Writers.Select(w => w.Name)));
-               // .ForMember(x => x.Sentences, opt => opt.MapFrom(x => x.Sentences.AsQueryable().To<ICollection<SentenceViewModel>>()));
         }
     }
 }

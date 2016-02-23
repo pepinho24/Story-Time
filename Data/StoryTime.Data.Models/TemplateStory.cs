@@ -11,7 +11,7 @@
     {
         public TemplateStory()
         {
-            this.Sentences = new HashSet<StorySentence>();
+            this.TemplateSentences = new HashSet<TemplateStorySentence>();
             this.Characters = new HashSet<StoryCharacter>();
         }
 
@@ -23,7 +23,7 @@
 
         public virtual ICollection<StoryCharacter> Characters { get; set; }
 
-        public virtual ICollection<StorySentence> Sentences { get; set; }
+        public virtual ICollection<TemplateStorySentence> TemplateSentences { get; set; }
 
         public bool IsStoryFinished { get; set; }
     }

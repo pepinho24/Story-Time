@@ -235,11 +235,14 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\Manage\SetPasswordViewModel.cs" />
     <Compile Include="ViewModels\Manage\VerifyPhoneNumberViewModel.cs" />
+    <Compile Include="ViewModels\Shared\InputSettings.cs" />
     <Compile Include="ViewModels\Stories\Sentence.cs" />
     <Compile Include="ViewModels\Stories\SentenceInputModel.cs" />
     <Compile Include="ViewModels\Stories\SentenceViewModel.cs" />
     <Compile Include="ViewModels\Stories\StoryInputModel.cs" />
     <Compile Include="ViewModels\Stories\StoryViewModel.cs" />
+    <Compile Include="ViewModels\TemplateStories\TemplateSentenceViewModel.cs" />
+    <Compile Include="ViewModels\TemplateStories\TemplateStoryViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -312,6 +315,10 @@
     <Content Include="Views\StorySettings\Index.cshtml" />
     <Content Include="Views\Shared\_AddWriterPartial.cshtml" />
     <Content Include="Views\TemplateStory\Configure.cshtml" />
+    <Content Include="Views\TemplateStory\Details.cshtml" />
+    <Content Include="Views\TemplateStory\Index.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\TemplateSentences.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\TemplateStoryViewModel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

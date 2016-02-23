@@ -1,0 +1,12 @@
+﻿@model StoryTime.Web.ViewModels.TemplateStories.TemplateStoryViewModel
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title"> @Html.ActionLink(Model.Title, "Details", "TemplateStory", new { area = string.Empty, id = Model.Id }, new { })</h3>
+    </div>
+    <div class="panel-body">
+        <blockquote>
+            @Html.DisplayFor(m => Model.Sentences)
+        </blockquote>
+    </div>
+</div>

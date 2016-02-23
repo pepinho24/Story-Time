@@ -84,9 +84,9 @@
     <Compile Include="Migrations\201602221035051_UpdateStoryModel.Designer.cs">
       <DependentUpon>201602221035051_UpdateStoryModel.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201602222229323_TemplateStoryModelAndStoryCharacter.cs" />
-    <Compile Include="Migrations\201602222229323_TemplateStoryModelAndStoryCharacter.Designer.cs">
-      <DependentUpon>201602222229323_TemplateStoryModelAndStoryCharacter.cs</DependentUpon>
+    <Compile Include="Migrations\201602231140001_TemplateStoryAndSentenceModel.cs" />
+    <Compile Include="Migrations\201602231140001_TemplateStoryAndSentenceModel.Designer.cs">
+      <DependentUpon>201602231140001_TemplateStoryAndSentenceModel.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -128,8 +128,8 @@
     <EmbeddedResource Include="Migrations\201602221035051_UpdateStoryModel.resx">
       <DependentUpon>201602221035051_UpdateStoryModel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201602222229323_TemplateStoryModelAndStoryCharacter.resx">
-      <DependentUpon>201602222229323_TemplateStoryModelAndStoryCharacter.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201602231140001_TemplateStoryAndSentenceModel.resx">
+      <DependentUpon>201602231140001_TemplateStoryAndSentenceModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
