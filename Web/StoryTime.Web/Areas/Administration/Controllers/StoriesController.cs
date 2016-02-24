@@ -52,6 +52,7 @@
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Stories_Create([DataSourceRequest]DataSourceRequest request, Story story)
         {
+            // dates in the story might make the modelstate invalid
             if (ModelState.IsValid)
             {
                 var entity = new Story
@@ -93,6 +94,7 @@
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Stories_Destroy([DataSourceRequest]DataSourceRequest request, Story story)
         {
+            // dates in the story might make the modelstate invalid
             if (ModelState.IsValid)
             {
                 this.stories.Delete(this.stories.GetById(story.Id));

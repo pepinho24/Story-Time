@@ -5,8 +5,12 @@
     using StoryTime.Common;
     using StoryTime.Web.Controllers;
 
-    [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
+    //[Authorize(Roles = GlobalConstants.AdministratorRoleName)]
     public class AdministrationController : BaseController
     {
+        public ActionResult Index()
+        {
+            return View();
+        }
     }
 }

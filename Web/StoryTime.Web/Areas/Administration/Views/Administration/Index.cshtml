@@ -1,0 +1,10 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Welcome to the administration page!</h2>
+
+@section AdminMenus{
+    <li>@Html.ActionLink("Admin Stories", "Index", "Stories", new { area = "Administration" }, null)</li>
+}

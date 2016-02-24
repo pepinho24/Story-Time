@@ -26,6 +26,9 @@
                     <li>@Html.ActionLink("Home", "Index", "Home", new { area = string.Empty }, null)</li>
                     <li>@Html.ActionLink("Stories", "Index", "Stories", new { area = string.Empty }, null)</li>
                     <li>@Html.ActionLink("Template Stories", "Index", "TemplateStory", new { area = string.Empty }, null)</li>
+                    <li>@Html.ActionLink("Admin", "Index", "Administration", new { area = "Administration" }, null)</li>
+                    
+                    @RenderSection("adminMenus", required: false)
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
