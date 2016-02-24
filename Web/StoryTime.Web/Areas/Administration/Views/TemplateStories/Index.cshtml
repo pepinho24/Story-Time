@@ -1,0 +1,34 @@
+﻿
+@(Html.Kendo().Grid<StoryTime.Data.Models.TemplateStory>()
+      .Name("grid")
+      .Columns(columns =>
+      {
+        columns.Bound(c => c.Title);
+        columns.Bound(c => c.Narrator);
+        columns.Bound(c => c.CharacterInTurn);
+        columns.Bound(c => c.IsStoryFinished);
+        columns.Bound(c => c.CreatedOn);
+        columns.Bound(c => c.ModifiedOn);
+        columns.Bound(c => c.IsDeleted);
+        columns.Bound(c => c.DeletedOn);
+        columns.Command(command => { command.Edit(); }).Width(180);
+      })
+      .ToolBar(toolbar => {
+            toolbar.Create();
+      })
+      .ColumnMenu()
+      .Editable(editable => editable.Mode(GridEditMode.PopUp))
+      .Pageable()
+      .Sortable(sortable => {
+          sortable.SortMode(GridSortMode.SingleColumn);
+      })
+      .Filterable()
+      .Scrollable()
+      .DataSource(dataSource => dataSource
+          .Ajax()
+          .Model(model => model.Id(p => p.Id))
+          .Read(read => read.Action("TemplateStories_Read", "TemplateStories"))
+          .Create(create => create.Action("TemplateStories_Create", "TemplateStories"))
+          .Update(update => update.Action("TemplateStories_Update", "TemplateStories"))
+      )
+)

@@ -64,5 +64,7 @@
                 }
             }
         }
+
+        public System.Data.Entity.DbSet<StoryTime.Data.Models.JokeCategory> JokeCategories { get; set; }
     }
 }

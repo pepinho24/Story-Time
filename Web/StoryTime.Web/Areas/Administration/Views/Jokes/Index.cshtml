@@ -1,0 +1,32 @@
+﻿
+@(Html.Kendo().Grid<StoryTime.Data.Models.Joke>()
+      .Name("grid")
+      .Columns(columns =>
+      {
+        columns.Bound(c => c.Content);
+        columns.Bound(c => c.CreatedOn);
+        columns.Bound(c => c.ModifiedOn);
+        columns.Bound(c => c.IsDeleted);
+        columns.Bound(c => c.DeletedOn);
+        columns.Command(command => { command.Edit(); command.Destroy(); }).Width(180);
+      })
+      .ToolBar(toolbar => {
+            toolbar.Create();
+      })
+      .ColumnMenu()
+      .Editable(editable => editable.Mode(GridEditMode.PopUp))
+      .Pageable()
+      .Sortable(sortable => {
+          sortable.SortMode(GridSortMode.SingleColumn);
+      })
+      .Filterable()
+      .Scrollable()
+      .DataSource(dataSource => dataSource
+          .Ajax()
+          .Model(model => model.Id(p => p.Id))
+          .Read(read => read.Action("Jokes_Read", "Jokes"))
+          .Create(create => create.Action("Jokes_Create", "Jokes"))
+          .Update(update => update.Action("Jokes_Update", "Jokes"))
+          .Destroy(destroy => destroy.Action("Jokes_Destroy", "Jokes"))
+      )
+)

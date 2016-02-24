@@ -202,7 +202,11 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Administration\AdministrationAreaRegistration.cs" />
     <Compile Include="Areas\Administration\Controllers\AdministrationController.cs" />
+    <Compile Include="Areas\Administration\Controllers\JokesController.cs" />
     <Compile Include="Areas\Administration\Controllers\StoriesController.cs" />
+    <Compile Include="Areas\Administration\Controllers\StorySentenceController.cs" />
+    <Compile Include="Areas\Administration\Controllers\TemplateStoriesController.cs" />
+    <Compile Include="Areas\Administration\Controllers\TemplateStorySentenceController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -343,6 +347,10 @@
     <Content Include="Content\KendoUI\kendo.common.min.css.map" />
     <Content Include="Content\KendoUI\kendo.default.min.css.map" />
     <Content Include="Areas\Administration\Views\Administration\Index.cshtml" />
+    <Content Include="Areas\Administration\Views\TemplateStories\Index.cshtml" />
+    <Content Include="Areas\Administration\Views\Jokes\Index.cshtml" />
+    <Content Include="Areas\Administration\Views\StorySentence\Index.cshtml" />
+    <Content Include="Areas\Administration\Views\TemplateStorySentence\Index.cshtml" />
     <None Include="Scripts\jquery-2.2.0.intellisense.js" />
     <Content Include="Scripts\jquery-2.2.0.js" />
     <Content Include="Scripts\jquery-2.2.0.min.js" />
@@ -411,6 +419,9 @@
     <Folder Include="Views\Base\" />
     <Folder Include="Views\Notifications\" />
     <Folder Include="Views\Sentences\" />
+    <Folder Include="Views\StorySentence\" />
+    <Folder Include="Views\TemplateStories\" />
+    <Folder Include="Views\TemplateStorySentence\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

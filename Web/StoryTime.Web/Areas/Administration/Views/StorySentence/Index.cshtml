@@ -1,0 +1,33 @@
+﻿
+@(Html.Kendo().Grid<StoryTime.Data.Models.StorySentence>()
+      .Name("grid")
+      .Columns(columns =>
+      {
+        columns.Bound(c => c.Content);
+        columns.Bound(c => c.Author);
+        columns.Bound(c => c.CreatedOn);
+        columns.Bound(c => c.ModifiedOn);
+        columns.Bound(c => c.IsDeleted);
+        columns.Bound(c => c.DeletedOn);
+        columns.Command(command => { command.Edit(); command.Destroy(); }).Width(180);
+      })
+      .ToolBar(toolbar => {
+            toolbar.Create();
+      })
+      .ColumnMenu()
+      .Editable(editable => editable.Mode(GridEditMode.PopUp))
+      .Pageable()
+      .Sortable(sortable => {
+          sortable.SortMode(GridSortMode.SingleColumn);
+      })
+      .Filterable()
+      .Scrollable()
+      .DataSource(dataSource => dataSource
+          .Ajax()
+          .Model(model => model.Id(p => p.Id))
+          .Read(read => read.Action("StorySentences_Read", "StorySentence"))
+          .Create(create => create.Action("StorySentences_Create", "StorySentence"))
+          .Update(update => update.Action("StorySentences_Update", "StorySentence"))
+          .Destroy(destroy => destroy.Action("StorySentences_Destroy", "StorySentence"))
+      )
+)
