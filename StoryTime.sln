@@ -37,6 +37,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoryTime.Web.Controllers.T
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoryTime.Common", "StoryTime.Common\StoryTime.Common.csproj", "{701F322F-AA01-4DDC-90B6-6935981C1E73}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "External Libraries", "External Libraries", "{AA7436A4-5F4A-4A0B-880B-0A50AE5BAA45}"
+	ProjectSection(SolutionItems) = preProject
+		External Libraries\Kendo.Mvc.dll = External Libraries\Kendo.Mvc.dll
+		External Libraries\Kendo.Mvc.xml = External Libraries\Kendo.Mvc.xml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
