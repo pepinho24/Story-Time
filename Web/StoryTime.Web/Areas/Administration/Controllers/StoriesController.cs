@@ -13,9 +13,17 @@
     using StoryTime.Data;
     using StoryTime.Data.Models;
 
+    using Data.Common;
+
     public class StoriesController : Controller
     {
+        private readonly IDbRepository<Story> stories;
         private ApplicationDbContext db = new ApplicationDbContext();
+
+        public StoriesController(IDbRepository<Story> stories)
+        {
+            this.stories = stories;
+        }
 
         public ActionResult Index()
         {
@@ -24,8 +32,9 @@
 
         public ActionResult Stories_Read([DataSourceRequest]DataSourceRequest request)
         {
-            IQueryable<Story> stories = db.Stories;
-            DataSourceResult result = stories.ToDataSourceResult(request, story => new {
+            //IQueryable<Story> stories = this.stories.All();
+            DataSourceResult result = this.stories.All().ToDataSourceResult(request, story => new
+            {
                 Id = story.Id,
                 Title = story.Title,
                 Creator = story.Creator,
@@ -57,8 +66,8 @@
                     DeletedOn = story.DeletedOn
                 };
 
-                db.Stories.Add(entity);
-                db.SaveChanges();
+                this.stories.Add(entity);
+                this.stories.Save();
                 story.Id = entity.Id;
             }
 
@@ -68,25 +77,15 @@
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Stories_Update([DataSourceRequest]DataSourceRequest request, Story story)
         {
-            if (ModelState.IsValid)
-            {
-                var entity = new Story
-                {
-                    Id = story.Id,
-                    Title = story.Title,
-                    Creator = story.Creator,
-                    WriterInTurn = story.WriterInTurn,
-                    IsStoryFinished = story.IsStoryFinished,
-                    CreatedOn = story.CreatedOn,
-                    ModifiedOn = story.ModifiedOn,
-                    IsDeleted = story.IsDeleted,
-                    DeletedOn = story.DeletedOn
-                };
-
-                db.Stories.Attach(entity);
-                db.Entry(entity).State = EntityState.Modified;
-                db.SaveChanges();
-            }
+           // if (ModelState.IsValid)
+           // {
+                var entity = this.stories.GetById(story.Id);
+                entity.IsDeleted = story.IsDeleted;
+                entity.IsStoryFinished = story.IsStoryFinished;
+                entity.Title = story.Title;
+                entity.WriterInTurn = story.WriterInTurn;
+                this.stories.Save();
+           // }
 
             return Json(new[] { story }.ToDataSourceResult(request, ModelState));
         }
@@ -96,31 +95,10 @@
         {
             if (ModelState.IsValid)
             {
-                var entity = new Story
-                {
-                    Id = story.Id,
-                    Title = story.Title,
-                    Creator = story.Creator,
-                    WriterInTurn = story.WriterInTurn,
-                    IsStoryFinished = story.IsStoryFinished,
-                    CreatedOn = story.CreatedOn,
-                    ModifiedOn = story.ModifiedOn,
-                    IsDeleted = story.IsDeleted,
-                    DeletedOn = story.DeletedOn
-                };
-
-                db.Stories.Attach(entity);
-                db.Stories.Remove(entity);
-                db.SaveChanges();
+                this.stories.Delete(this.stories.GetById(story.Id));
             }
 
             return Json(new[] { story }.ToDataSourceResult(request, ModelState));
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            db.Dispose();
-            base.Dispose(disposing);
         }
     }
 }
