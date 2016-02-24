@@ -18,7 +18,6 @@
     public class StoriesController : Controller
     {
         private readonly IDbRepository<Story> stories;
-        private ApplicationDbContext db = new ApplicationDbContext();
 
         public StoriesController(IDbRepository<Story> stories)
         {
@@ -32,7 +31,6 @@
 
         public ActionResult Stories_Read([DataSourceRequest]DataSourceRequest request)
         {
-            //IQueryable<Story> stories = this.stories.All();
             DataSourceResult result = this.stories.All().ToDataSourceResult(request, story => new
             {
                 Id = story.Id,
@@ -53,8 +51,8 @@
         public ActionResult Stories_Create([DataSourceRequest]DataSourceRequest request, Story story)
         {
             // dates in the story might make the modelstate invalid
-            if (ModelState.IsValid)
-            {
+            //if (ModelState.IsValid)
+            //{
                 var entity = new Story
                 {
                     Title = story.Title,
@@ -70,7 +68,7 @@
                 this.stories.Add(entity);
                 this.stories.Save();
                 story.Id = entity.Id;
-            }
+           // }
 
             return Json(new[] { story }.ToDataSourceResult(request, ModelState));
         }
@@ -95,10 +93,10 @@
         public ActionResult Stories_Destroy([DataSourceRequest]DataSourceRequest request, Story story)
         {
             // dates in the story might make the modelstate invalid
-            if (ModelState.IsValid)
-            {
+            //if (ModelState.IsValid)
+            //{
                 this.stories.Delete(this.stories.GetById(story.Id));
-            }
+           // }
 
             return Json(new[] { story }.ToDataSourceResult(request, ModelState));
         }

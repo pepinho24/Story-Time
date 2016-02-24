@@ -1,21 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Net;
-using System.Web;
-using System.Web.Mvc;
-using Kendo.Mvc.Extensions;
-using Kendo.Mvc.UI;
-using StoryTime.Data.Models;
-using StoryTime.Data;
-
-namespace StoryTime.Web.Areas.Administration.Controllers
+﻿namespace StoryTime.Web.Areas.Administration.Controllers
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Data;
+    using System.Data.Entity;
+    using System.Linq;
+    using System.Net;
+    using System.Web;
+    using System.Web.Mvc;
+    using Kendo.Mvc.Extensions;
+    using Kendo.Mvc.UI;
+    using StoryTime.Data;
+    using StoryTime.Data.Models;
+    using Data.Common;
+
     public class JokesController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private readonly IDbRepository<Joke> jokes;
+
+        public JokesController(IDbRepository<Joke> jokes)
+        {
+            this.jokes = jokes;
+        }
 
         public ActionResult Index()
         {
@@ -24,8 +30,7 @@ namespace StoryTime.Web.Areas.Administration.Controllers
 
         public ActionResult Jokes_Read([DataSourceRequest]DataSourceRequest request)
         {
-            IQueryable<Joke> jokes = db.Jokes;
-            DataSourceResult result = jokes.ToDataSourceResult(request, joke => new {
+            DataSourceResult result = this.jokes.All().ToDataSourceResult(request, joke => new {
                 Id = joke.Id,
                 Content = joke.Content,
                 CreatedOn = joke.CreatedOn,
@@ -40,8 +45,8 @@ namespace StoryTime.Web.Areas.Administration.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Jokes_Create([DataSourceRequest]DataSourceRequest request, Joke joke)
         {
-            if (ModelState.IsValid)
-            {
+            //if (ModelState.IsValid)
+            //{
                 var entity = new Joke
                 {
                     Content = joke.Content,
@@ -51,10 +56,10 @@ namespace StoryTime.Web.Areas.Administration.Controllers
                     DeletedOn = joke.DeletedOn
                 };
 
-                db.Jokes.Add(entity);
-                db.SaveChanges();
+                this.jokes.Add(entity);
+                this.jokes.Save();
                 joke.Id = entity.Id;
-            }
+            //}
 
             return Json(new[] { joke }.ToDataSourceResult(request, ModelState));
         }
@@ -62,22 +67,13 @@ namespace StoryTime.Web.Areas.Administration.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Jokes_Update([DataSourceRequest]DataSourceRequest request, Joke joke)
         {
-            if (ModelState.IsValid)
-            {
-                var entity = new Joke
-                {
-                    Id = joke.Id,
-                    Content = joke.Content,
-                    CreatedOn = joke.CreatedOn,
-                    ModifiedOn = joke.ModifiedOn,
-                    IsDeleted = joke.IsDeleted,
-                    DeletedOn = joke.DeletedOn
-                };
-
-                db.Jokes.Attach(entity);
-                db.Entry(entity).State = EntityState.Modified;
-                db.SaveChanges();
-            }
+            // if (ModelState.IsValid)
+            // {
+            var entity = this.jokes.GetById(joke.Id);
+            entity.IsDeleted = joke.IsDeleted;
+            entity.Content = joke.Content;
+            this.jokes.Save();
+            // }
 
             return Json(new[] { joke }.ToDataSourceResult(request, ModelState));
         }
@@ -85,30 +81,12 @@ namespace StoryTime.Web.Areas.Administration.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Jokes_Destroy([DataSourceRequest]DataSourceRequest request, Joke joke)
         {
-            if (ModelState.IsValid)
-            {
-                var entity = new Joke
-                {
-                    Id = joke.Id,
-                    Content = joke.Content,
-                    CreatedOn = joke.CreatedOn,
-                    ModifiedOn = joke.ModifiedOn,
-                    IsDeleted = joke.IsDeleted,
-                    DeletedOn = joke.DeletedOn
-                };
-
-                db.Jokes.Attach(entity);
-                db.Jokes.Remove(entity);
-                db.SaveChanges();
-            }
+            //if (ModelState.IsValid)
+            //{
+                this.jokes.Delete(this.jokes.GetById(joke.Id));
+            //}
 
             return Json(new[] { joke }.ToDataSourceResult(request, ModelState));
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            db.Dispose();
-            base.Dispose(disposing);
         }
     }
 }

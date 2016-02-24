@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - StoryTime</title>
-    
+
     @Styles.Render("~/Content/css")
     @Styles.Render("~/Content/kendo/css")
     @Scripts.Render("~/bundles/jquery")
@@ -27,7 +27,7 @@
                     <li>@Html.ActionLink("Stories", "Index", "Stories", new { area = string.Empty }, null)</li>
                     <li>@Html.ActionLink("Template Stories", "Index", "TemplateStory", new { area = string.Empty }, null)</li>
                     <li>@Html.ActionLink("Admin", "Index", "Administration", new { area = "Administration" }, null)</li>
-                    
+
                     @RenderSection("adminMenus", required: false)
                 </ul>
                 @Html.Partial("_LoginPartial")
@@ -39,10 +39,12 @@
         @RenderBody()
         <br />
         <div>
-            @RenderSection("additionalInfo", required: false)
+            @RenderSection("jokes", required: false)
         </div>
         <hr />
         <footer>
+
+
             <p>&copy; @DateTime.Now.Year - StoryTime</p>
         </footer>
     </div>
