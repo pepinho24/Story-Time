@@ -1,4 +1,4 @@
-﻿namespace StoryTime.Web.Controllers
+﻿namespace StoryTime.Web.Areas.Stories.Controllers
 {
     using System.Linq;
     using System.Web.Mvc;
@@ -7,7 +7,7 @@
     using StoryTime.Web.Infrastructure.Mapping;
     using AutoMapper.QueryableExtensions;
     using System.Collections.Generic;
-
+    using Web.Controllers;
     public class StoriesController : BaseController
     {
         private readonly IStoriesService stories;

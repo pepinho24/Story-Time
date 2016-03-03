@@ -1,4 +1,4 @@
-﻿namespace StoryTime.Web.Controllers
+﻿namespace StoryTime.Web.Areas.Stories.Controllers
 {
     using System;
     using System.Collections.Generic;
@@ -8,6 +8,8 @@
     using StoryTime.Services.Data;
     using ViewModels.TemplateStories;
     using Infrastructure.Mapping;
+    using Web.Controllers;
+
     public class TemplateStoryController : BaseController
     {
         private readonly ITemplateStoriesService stories;

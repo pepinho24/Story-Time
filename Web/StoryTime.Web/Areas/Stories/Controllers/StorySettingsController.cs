@@ -1,4 +1,4 @@
-﻿namespace StoryTime.Web.Controllers
+﻿namespace StoryTime.Web.Areas.Stories.Controllers
 {
     using System;
     using System.Collections.Generic;
@@ -6,7 +6,7 @@
     using System.Web;
     using System.Web.Mvc;
     using StoryTime.Services.Data;
-
+    using Web.Controllers;
     public class StorySettingsController : BaseController
     {
         private readonly IStoriesService stories;
