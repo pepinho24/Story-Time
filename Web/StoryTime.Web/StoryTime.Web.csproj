@@ -202,23 +202,13 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Administration\AdministrationAreaRegistration.cs" />
     <Compile Include="Areas\Administration\Controllers\AdministrationController.cs" />
-    <Compile Include="Areas\Administration\Controllers\JokesController.cs" />
-    <Compile Include="Areas\Administration\Controllers\StoriesController.cs" />
-    <Compile Include="Areas\Administration\Controllers\StorySentenceController.cs" />
-    <Compile Include="Areas\Administration\Controllers\TemplateStoriesController.cs" />
-    <Compile Include="Areas\Administration\Controllers\TemplateStorySentenceController.cs" />
     <Compile Include="Areas\Stories\StoriesAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\JokesController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="App_Start\GlimpseSecurityPolicy.cs" />
     <Compile Include="Controllers\NotificationsController.cs" />
-    <Compile Include="Areas\Stories\Controllers\SentencesController.cs" />
-    <Compile Include="Areas\Stories\Controllers\StoriesController.cs" />
-    <Compile Include="Areas\Stories\Controllers\StorySettingsController.cs" />
-    <Compile Include="Areas\Stories\Controllers\TemplateStoryController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -418,6 +408,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Administration\Models\" />
     <Folder Include="Areas\Administration\Views\Shared\" />
+    <Folder Include="Areas\Stories\Controllers\" />
     <Folder Include="Areas\Stories\Models\" />
     <Folder Include="Views\Base\" />
     <Folder Include="Views\Notifications\" />

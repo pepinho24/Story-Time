@@ -12,13 +12,13 @@
     {
         public ApplicationUser()
         {
-            this.Stories = new HashSet<Story>();
+         //   this.Stories = new HashSet<Story>();
             this.CreatedOn = DateTime.Now;
         }
 
         public string Rank { get; set; }
 
-        public virtual ICollection<Story> Stories { get; set; }
+       // public virtual ICollection<Story> Stories { get; set; }
 
         public bool IsDeleted { get; set; }
 

@@ -41,7 +41,7 @@
 
             routes.MapRoute(
                 name: "Controller",
-                url: "{area}/{controller}/{action}/{id}",
+                url: "{controller}/{action}/{id}",
                 defaults: new { area = string.Empty, controller = "Home", action = "Index", id = UrlParameter.Optional },
                 namespaces: new string[] { "StoryTime.Web.Controllers" });
 

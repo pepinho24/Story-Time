@@ -1,9 +1,15 @@
 ﻿namespace StoryTime.Web.ViewModels.Account
 {
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     public class RegisterViewModel
     {
+        [Required]
+        [Index(IsUnique = true)]
+        [Display(Name = "Username")]
+        public string UserName { get; set; }
+
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]

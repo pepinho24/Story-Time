@@ -5,7 +5,7 @@
     using StoryTime.Data;
     using StoryTime.Data.Common;
     using StoryTime.Data.Models;
-    using StoryTime.Services.Data;
+   // using StoryTime.Services.Data;
 
     public static class Program
     {
@@ -13,7 +13,7 @@
         {
             var db = new ApplicationDbContext();
             var repo = new DbRepository<JokeCategory>(db);
-            var categoriesService = new CategoriesService(repo);
+          //  var categoriesService = new CategoriesService(repo);
 
             var configuration = Configuration.Default.WithDefaultLoader();
             var browsingContext = BrowsingContext.New(configuration);
@@ -26,9 +26,9 @@
                 if (!string.IsNullOrWhiteSpace(jokeContent))
                 {
                     var categoryName = document.QuerySelector("#content_box .thecategory a").TextContent.Trim();
-                    var category = categoriesService.EnsureCategory(categoryName);
-                    var joke = new Joke { Category = category, Content = jokeContent };
-                    db.Jokes.Add(joke);
+                  //  var category = categoriesService.EnsureCategory(categoryName);
+                   // var joke = new Joke { Category = category, Content = jokeContent };
+                    //db.Jokes.Add(joke);
                     db.SaveChanges();
                     Console.WriteLine(i);
                 }

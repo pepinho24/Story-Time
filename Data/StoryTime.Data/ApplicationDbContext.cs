@@ -17,21 +17,21 @@
         {
         }
 
-        public IDbSet<Joke> Jokes { get; set; }
+        //public IDbSet<Joke> Jokes { get; set; }
 
-        public IDbSet<JokeCategory> JokesCategories { get; set; }
+        //public IDbSet<JokeCategory> JokesCategories { get; set; }
 
-        public IDbSet<Story> Stories { get; set; }
+        //public IDbSet<Story> Stories { get; set; }
 
-        public IDbSet<StorySentence> StorySentences { get; set; }
+        //public IDbSet<StorySentence> StorySentences { get; set; }
 
-        public IDbSet<TemplateStorySentence> TemplateStorySentences { get; set; }
+        //public IDbSet<TemplateStorySentence> TemplateStorySentences { get; set; }
 
-        public IDbSet<StoryWriter> StoryWriters { get; set; }
+        //public IDbSet<StoryWriter> StoryWriters { get; set; }
 
-        public IDbSet<TemplateStory> TemplateStories { get; set; }
+        //public IDbSet<TemplateStory> TemplateStories { get; set; }
 
-        public IDbSet<StoryCharacter> StoryCharacters { get; set; }
+        //public IDbSet<StoryCharacter> StoryCharacters { get; set; }
 
         public static ApplicationDbContext Create()
         {
@@ -63,6 +63,6 @@
                     entity.ModifiedOn = DateTime.Now;
                 }
             }
-        }                
+        }
     }
 }

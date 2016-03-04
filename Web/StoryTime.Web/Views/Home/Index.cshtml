@@ -1,15 +1,26 @@
-﻿@model StoryTime.Web.ViewModels.Home.IndexViewModel
+﻿@*@model StoryTime.Web.ViewModels.Home.IndexViewModel*@
+@model IEnumerable<StoryTime.Data.Models.ApplicationUser>
 @{
     ViewBag.Title = "Home Page";
 }
 <div class="row">
-    <div class="col-md-6">
+    @*<div class="col-md-6">
         <h1>Stories</h1>
         @Html.DisplayFor(m => m.Stories)
     </div>
     <div class="col-md-6">
         <h1>Template Stories</h1>
         @Html.DisplayFor(m => m.TemplateStories)
+    </div>*@
+
+    <div class="col-md-6">
+        <h1>Users</h1>
+        @foreach (var user in Model)
+        {
+            <div class="row">@user.UserName registered on @user.CreatedOn</div>
+        }
+
+       @* @Html.DisplayForModel()*@
     </div>
 </div>
 
