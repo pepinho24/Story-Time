@@ -11,12 +11,12 @@
     public class StoriesService : IStoriesService
     {
         private readonly IDbRepository<Story> stories;
-        private readonly IDbRepository<StoryWriter> writers;
+        private readonly IUsersService users;
 
-        public StoriesService(IDbRepository<Story> stories, IDbRepository<StoryWriter> writers)
+        public StoriesService(IDbRepository<Story> stories, IUsersService users)
         {
             this.stories = stories;
-            this.writers = writers;
+            this.users = users;
         }
 
         public Story GetById(int id)
@@ -25,17 +25,16 @@
             return story;
         }
 
-        public Story Create(string title, string creatorName)
+        public Story Create(string title, string plot,  string creatorName)
         {
-            var creator = new StoryWriter() { Name = creatorName };
+            var user = this.users.GetAll().FirstOrDefault(u => u.UserName == creatorName);
+
             var story = new Story()
             {
+                Plot = plot,
                 Title = title,
-                Creator = creatorName,
-                IsStoryFinished = false,
-                WriterInTurn = 0
+                User = user
             };
-            story.Writers.Add(creator);
 
             this.stories.Add(story);
             this.stories.Save();
@@ -43,72 +42,11 @@
             return story;
         }
 
-        public void AddSentence(int storyId, string content, string author)
-        {
-            var story = this.stories.GetById(storyId);
-            story.WriterInTurn = story.WriterInTurn >= story.Writers.Count ? 0 : story.WriterInTurn;
-            var wrInTurn = story.Writers.ElementAtOrDefault(story.WriterInTurn);
-
-            if (wrInTurn == null || wrInTurn.Name != author)
-            {
-                return;
-            }
-
-            var sentence = new StorySentence() { Content = content, Author = author };
-
-            story.Sentences.Add(sentence);
-            story.WriterInTurn++;
-            this.stories.Save();
-        }
-
         public IQueryable<Story> GetLatestStories(int count)
         {
             return this.stories.All().OrderBy(x => x.CreatedOn).Take(count);
 
             // return this.stories.All().OrderBy(x => Guid.NewGuid()).Take(count);
-        }
-
-        public void AddWriter(int storyId, string writer, string author)
-        {
-            // TODO: Validation, does the writer exist
-            var story = this.stories.GetById(storyId);
-            if (story.Creator != author)
-            {
-                return;
-            }
-
-            var writerEntity = new StoryWriter() { Name = writer };
-            story.Writers.Add(writerEntity);
-            this.stories.Save();
-        }
-
-        public void RemoveWriter(int storyId, string writer, string author)
-        {
-            // TODO: Validation, does the writer exist
-            var story = this.stories.GetById(storyId);
-            if (story.Creator != author)
-            {
-                return;
-            }
-
-            var wr = this.writers.All().Where(w => w.Name == writer && w.StoryId == storyId).FirstOrDefault();
-            if (wr != null)
-            {
-                this.writers.HardDelete(wr);
-                this.writers.Save();
-            }
-        }
-
-        public void Finish(int storyId, string creator)
-        {
-            var story = this.stories.GetById(storyId);
-            if (story.Creator != creator)
-            {
-                return;
-            }
-
-            story.IsStoryFinished = true;
-            this.stories.Save();
         }
     }
 }

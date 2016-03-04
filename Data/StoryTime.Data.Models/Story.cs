@@ -11,22 +11,14 @@
     {
         public Story()
         {
-            this.Sentences = new HashSet<StorySentence>();
-            this.Writers = new HashSet<StoryWriter>();
+            //this.Sentences = new HashSet<StorySentence>();
+            //this.Writers = new HashSet<StoryWriter>();
         }
 
         public virtual ApplicationUser User { get; set; }
 
+        public string Plot { get; set; }
+
         public string Title { get; set; }
-
-        public string Creator { get; set; }
-
-        public virtual ICollection<StoryWriter> Writers { get; set; }
-
-        public virtual ICollection<StorySentence> Sentences { get; set; }
-
-        public int WriterInTurn { get; set; }
-
-        public bool IsStoryFinished { get; set; }
     }
 }

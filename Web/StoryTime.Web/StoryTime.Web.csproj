@@ -403,6 +403,7 @@
     <Content Include="Areas\Stories\Views\Shared\_TemplateStoryStatusPartial.cshtml" />
     <Content Include="Areas\Stories\Views\Shared\_FinishStoryButtonPartial.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\StoryCharacter.cshtml" />
+    <Content Include="Views\Home\CreateStory.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

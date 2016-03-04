@@ -13,24 +13,36 @@
 
     public class HomeController : BaseController
     {
-        //private readonly IJokesService jokes;
-        //private readonly ICategoriesService jokeCategories;
-        //private readonly IStoriesService stories;
-        //private readonly ITemplateStoriesService templateStories;
         private readonly IUsersService users;
+        private readonly IStoriesService stories;
 
-        public HomeController(IUsersService users)
+        public HomeController(IUsersService users, IStoriesService stories)
         {
             this.users = users;
+            this.stories = stories;
         }
 
         public ActionResult Index()
         {
-            var users = this.users.GetAll();
+            var users = this.users.GetAll().ToList();
 
             return this.View(users);
         }
 
+        [HttpGet]
+        [Authorize]
+        public ActionResult CreateStory()
+        {
+            return this.View();
+        }
+
+        [HttpPost]
+        [Authorize]
+        public ActionResult CreateStory(StoryInputModel model)
+        {
+            var storyId = this.stories.Create(model.Title, model.Plot, this.User.Identity.Name).Id;
+            return this.RedirectToAction("Index", "Home");
+        }
         //public HomeController(
         //    IJokesService jokes,
         //    IStoriesService stories,

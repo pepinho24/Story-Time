@@ -5,18 +5,10 @@
 
     public interface IStoriesService
     {
-        void AddSentence(int storyId, string content, string author);
-
-        void AddWriter(int storyId, string writer, string author);
-
-        void RemoveWriter(int storyId, string writer, string author);
-
-        Story Create(string title, string creatorName);
+        Story Create(string title, string plot, string creatorName);
 
         Story GetById(int id);
 
         IQueryable<Story> GetLatestStories(int count);
-
-        void Finish(int storyId, string creator);
     }
 }
