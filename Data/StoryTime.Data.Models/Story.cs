@@ -15,6 +15,8 @@
             this.Writers = new HashSet<StoryWriter>();
         }
 
+        public virtual ApplicationUser User { get; set; }
+
         public string Title { get; set; }
 
         public string Creator { get; set; }
